@@ -48,6 +48,13 @@
                     <td>{{$post->slug}}</td> 
                     <td>{{Str::substr($post->published_at, 0, 10)}}</td> 
                     <td><a class="btn btn-success" href="{{route('admin.posts.edit',$post)}}">Modifica</a></td>
+                    <td>
+                      <form action="{{ route('admin.posts.destroy',$post) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Elimina</button>
+                      </form>
+                    </td>
                   </tr> 
                 @endforeach
               </tbody>
