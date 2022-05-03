@@ -1,4 +1,4 @@
-@extends('layouts.app');
+@extends('layouts.app')
 
 @section('content')
 <div class="container">
@@ -18,14 +18,14 @@
                   @csrf
                   <div class="mb-3">
                     <label for="title" class="form-label">Title*</label>
-                    <input type="text" class="form-control @error ('title') is-invalid @enderror" name="title" id="title" value="{{ old('title') }}">
+                    <input type="text" class="form-control @error ('title') is-invalid @enderror" name="title" id="title" value="{{ old('title') ?: $post->title }}">
                     @error('title')
                       <div class="invalid-feedback">{{ $message }}</div>    
                     @enderror
                   </div>
                   <div class="mb-3">
                     <label for="content" class="form-label">Content*</label>
-                    <textarea type="text" class="form-control @error ('content') is-invalid @enderror" name="content" id="content" value="{{ old('content') }}"></textarea>
+                    <textarea type="text" class="form-control @error ('content') is-invalid @enderror" name="content" id="content" value="{{ old('content') ?:$pos->content }}"></textarea>
                     @error('content')
                       <div class="invalid-feedback">{{ $message }}</div>    
                     @enderror
@@ -42,4 +42,4 @@
       </div>
   </div>
 </div>
-@endsection
+@section
