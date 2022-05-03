@@ -46,7 +46,7 @@
                     <td>{{$post->id}}</td>
                     <td>{{$post->title}}</td> 
                     <td>{{$post->slug}}</td> 
-                    <td>{{$post->published_at}}</td> 
+                    <td>{{Str::substr($post->published_at, 0, 10)}}</td> 
                     <td><a class="btn btn-success" href="{{route('admin.posts.edit',$post)}}">Modifica</a></td>
                   </tr> 
                 @endforeach

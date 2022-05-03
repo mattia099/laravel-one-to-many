@@ -85,7 +85,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        return view('admin.posts.edit',compact('post'));
     }
 
     /**
@@ -96,8 +96,17 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Post $post)
-    {
-        //
+    {   
+        $request->validate([
+            'title' => 'required|string|max:150|',
+            'content' => 'required|string',
+            'published_at' => 'nullable|date'
+        ]);
+        
+        $data = $request->all();
+        $post->update($data);
+        
+        return redirect()->route('admin.posts.index');
     }
 
     /**
