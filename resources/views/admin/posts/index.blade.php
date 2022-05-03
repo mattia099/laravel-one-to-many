@@ -52,7 +52,7 @@
                       <form action="{{ route('admin.posts.destroy',$post) }}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Elimina</button>
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Sicuro di voler eliminare il post?')">Elimina</button>
                       </form>
                     </td>
                   </tr> 
