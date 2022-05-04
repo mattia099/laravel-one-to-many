@@ -48,20 +48,8 @@ class PostController extends Controller
         $newPost->title = $data['title'];
         $newPost->content = $data['content'];
 
-        $slug = Str::slug($newPost->title);
-        $slugTmp = $slug; //variabile temporanea 
-        $counter = 1; //contatore
-        $dbSlug = Post::where('slug',$slug)->first();//cerco se presente slug creato
-        
-        while( $dbSlug ){ //cicla se trovi slug nel db
-            $slug = $slugTmp .'-' .$counter;
-            $counter++;    
-            $dbSlug = Post::where('slug',$slug)->first();
-        }
+        $newPost->slug = Post::getUniqueSlug($data['title']);
 
-        $newPost->slug = $slug;
-
-        
         $newPost->save();
         return redirect()->route('admin.posts.index');
     }
@@ -104,6 +92,14 @@ class PostController extends Controller
         ]);
         
         $data = $request->all();
+
+        if($post->title != $data['title']){
+            $slug = Post::getUniqueSlug($data['title']);
+            $data['slug'] = $slug;
+        }
+        
+            
+        
         $post->update($data);
         
         return redirect()->route('admin.posts.index');
