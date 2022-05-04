@@ -36,6 +36,7 @@
                 <th>Id</th>
                 <th>Titolo</th> 
                 <th>Slug</th>
+                <th>Categoria</th>
                 <th>Data di pubblicazione</th>
                 <th></th> 
               </thead> 
@@ -46,6 +47,7 @@
                     <td>{{$post->id}}</td>
                     <td>{{$post->title}}</td> 
                     <td>{{$post->slug}}</td> 
+                    <td>{{ $post->category ? $post->category->name : "-" }}</td>
                     <td>{{Str::substr($post->published_at, 0, 10)}}</td> 
                     <td><a class="btn btn-success" href="{{route('admin.posts.edit',$post)}}">Modifica</a></td>
                     <td>
