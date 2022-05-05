@@ -105,7 +105,7 @@ class PostController extends Controller
         
         
         $post->update($data);
-        dd($post);
+        
         return redirect()->route('admin.posts.index');
     }
 
