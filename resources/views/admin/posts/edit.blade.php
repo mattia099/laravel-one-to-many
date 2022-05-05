@@ -27,12 +27,15 @@
 
                   <div class="form-group">
                     <label for="category_id">Categories</label>
-                    <select class="form-control" id="category_id" name="category_id">
+                    <select class="form-control @error('category_id') is-invalid  @enderror" id="category_id" name="category_id">
                       <option value="">--Seleziona--</option>
                       @foreach ($categories as $category)
-                        <option {{ old('category_id') == $category->id ? 'selected' : '' }} value="{{old($category->id)}}">{{$category->name}}</option>
+                        <option {{ old( 'category_id',optional($post->category)->id == $category->id ) ? 'selected' : '' }} value="{{$category->id}}">{{$category->name}}</option>
                       @endforeach
                     </select>
+                    @error('category_id')
+                      <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                   </div>
 
                   <div class="form-group mb-3">
@@ -45,7 +48,7 @@
                   </div>
                   <div class="form-group mb-3">
                     <label for="published_at" class="form-label">Published at</label>
-                    <input type="date" class="form-control" name="published_at" id="publishered_at" value="{{ Str::substr($post->published_at, 0, 10) }}">
+                    <input type="date" class="form-control" name="published_at" id="published_at" value="{{ Str::substr($post->published_at, 0, 10) }}">
                   </div>
                   
                   <button type="submit" class="btn btn-primary">Salva</button>

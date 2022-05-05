@@ -77,7 +77,7 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         $categories = Category::all();
-        return view('admin.posts.edit',compact('post'),compact('categories'));
+        return view('admin.posts.edit',compact('post','categories'));
     }
 
     /**
@@ -97,7 +97,7 @@ class PostController extends Controller
         ]);
         
         $data = $request->all();
-
+        
         if($post->title != $data['title']){
             $slug = Post::getUniqueSlug($data['title']);
             $data['slug'] = $slug;
@@ -105,7 +105,7 @@ class PostController extends Controller
         
         
         $post->update($data);
-        
+        dd($post);
         return redirect()->route('admin.posts.index');
     }
 
